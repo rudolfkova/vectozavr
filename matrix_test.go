@@ -186,8 +186,8 @@ func TestTranslate(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := Translate(tt.args.v); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("Translate() = %v, want %v", got, tt.want)
+			if got := Translation(tt.args.v); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Translation() = %v, want %v", got, tt.want)
 			}
 		})
 	}

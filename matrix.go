@@ -6,6 +6,7 @@ type Matrix struct {
 	m [4][4]float64
 }
 
+//Создание новой матрицы
 func NewMatrix(m [4][4]float64) Matrix {
 	return Matrix{
 		m: m,
@@ -13,6 +14,7 @@ func NewMatrix(m [4][4]float64) Matrix {
 
 }
 
+//Умножение матрицы на матрицу
 func (m Matrix) MatMul(n Matrix) Matrix {
 	var result [4][4]float64
 	for i := 0; i < 4; i++ {
@@ -27,6 +29,7 @@ func (m Matrix) MatMul(n Matrix) Matrix {
 	return NewMatrix(result)
 }
 
+//Умножение матрицы на вектор размером 4
 func (m Matrix) Vec4Mul(v Vec4) Vec4 {
 	var v1 Vec4
 	v1.X = m.m[0][0]*v.X + m.m[0][1]*v.Y + m.m[0][2]*v.Z + m.m[0][3]*v.W
@@ -38,6 +41,7 @@ func (m Matrix) Vec4Mul(v Vec4) Vec4 {
 
 }
 
+//Умножение матрицы на вектор размером 3
 func (m Matrix) Vec3Mul(v Vec3) Vec3 {
 	var v1 Vec3
 	v1.X = m.m[0][0]*v.X + m.m[0][1]*v.Y + m.m[0][2]*v.Z
@@ -47,6 +51,7 @@ func (m Matrix) Vec3Mul(v Vec3) Vec3 {
 	return v1
 }
 
+//Единичная матрица
 func Identity() Matrix {
 	return NewMatrix([4][4]float64{
 		{1, 0, 0, 0},
@@ -56,6 +61,7 @@ func Identity() Matrix {
 	})
 }
 
+//Матрица, все элементы который заданные числа
 func Constant(value float64) Matrix {
 	var m Matrix
 	for i := 0; i < 4; i++ {
@@ -66,10 +72,12 @@ func Constant(value float64) Matrix {
 	return m
 }
 
+//Пустая матрица (все значения нулевые)
 func ZeroMatrix() Matrix {
 	return NewMatrix([4][4]float64{})
 }
 
+//Матрица изменения масштаба
 func Scale(v Vec3) Matrix {
 	return NewMatrix([4][4]float64{
 		{v.X, 0, 0, 0},
@@ -79,7 +87,9 @@ func Scale(v Vec3) Matrix {
 	})
 
 }
-func Translate(v Vec3) Matrix {
+
+//Матрица перемещения
+func Translation(v Vec3) Matrix {
 	return NewMatrix([4][4]float64{
 		{1, 0, 0, v.X},
 		{0, 1, 0, v.Y},
@@ -89,6 +99,7 @@ func Translate(v Vec3) Matrix {
 
 }
 
+//Матрица поворота вокруг оси X
 func RotationX(angle float64) Matrix {
 	c := math.Cos(angle)
 	s := math.Sin(angle)
@@ -102,6 +113,7 @@ func RotationX(angle float64) Matrix {
 
 }
 
+//Матрица поворота вокруг оси Y
 func RotationY(angle float64) Matrix {
 	c := math.Cos(angle)
 	s := math.Sin(angle)
