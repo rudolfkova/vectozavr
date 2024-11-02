@@ -141,12 +141,12 @@ func RotationZ(angle float64) Matrix {
 }
 
 //Матрица поворота (по всем осям)
-func (m Matrix) Rotation(v Vec3) Matrix {
+func Rotation(v Vec3) Matrix {
 	r := RotationX(v.X).MatMul(RotationY(v.Y))
 	return r.MatMul(RotationZ(v.Z))
 }
 
-func (m Matrix) RotationV(v Vec3, a float64) Matrix {
+func RotationV(v Vec3, a float64) Matrix {
 	var r Matrix
 	nv, err1 := v.Normalize()
 	if err1 != nil {
