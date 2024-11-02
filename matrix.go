@@ -126,3 +126,22 @@ func RotationY(angle float64) Matrix {
 	})
 
 }
+
+//Матрица поворота вокруг оси Z
+func RotationZ(angle float64) Matrix {
+	c := math.Cos(angle)
+	s := math.Sin(angle)
+
+	return NewMatrix([4][4]float64{
+		{c, -s, 0, 0},
+		{s, c, 0, 0},
+		{0, 0, 1, 0},
+		{0, 0, 0, 1},
+	})
+}
+
+//Матрица поворота (по всем осям)
+func (m Matrix) Rotation(v Vec3) Matrix {
+	r := RotationX(v.X).MatMul(RotationY(v.Y))
+	return r.MatMul(RotationZ(v.Z))
+}
