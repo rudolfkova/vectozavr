@@ -192,3 +192,23 @@ func (m Matrix) Z() Vec3 {
 func (m Matrix) W() Vec3 {
 	return Vec3{m.m[0][3], m.m[1][3], m.m[2][3]}
 }
+
+//Создаёт патрицу проекции
+func Projection(fov float64, aspect, ZNear, ZFar float64) Matrix {
+	return NewMatrix([4][4]float64{
+		{1.0 / (math.Tan(math.Pi*fov*0.5/180) * aspect), 0, 0, 0},
+		{0, 1.0 / math.Tan(math.Pi*fov*0.5/180), 0, 0},
+		{0, 0, ZFar / (ZFar - ZNear), -ZFar * ZNear / (ZFar - ZNear)},
+		{0, 0, 1, 0},
+	})
+}
+
+//Создаёт матрицу экранного пространства
+func ScreenSpace(width, height float64) Matrix {
+	return NewMatrix([4][4]float64{
+		{-0.5 * width, 0, 0, 0.5 * width},
+		{0, -0.5 * height, 0, 0.5 * height},
+		{0, 0, 1, 0},
+		{0, 0, 0, 1},
+	})
+}
