@@ -1,4 +1,4 @@
-package Matrix
+package vectozavr
 
 import (
 	"reflect"
