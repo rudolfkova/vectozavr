@@ -240,3 +240,87 @@ func TestRotationY(t *testing.T) {
 		})
 	}
 }
+
+func TestMatrix_X(t *testing.T) {
+	tests := []struct {
+		name string
+		m    Matrix
+		want Vec3
+	}{
+		{
+			name: "test1",
+			m:    NewMatrix([4][4]float64{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}}),
+			want: Vec3{1, 5, 9},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.m.X(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Matrix.X() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestMatrix_Y(t *testing.T) {
+	tests := []struct {
+		name string
+		m    Matrix
+		want Vec3
+	}{
+		{
+			name: "test1",
+			m:    NewMatrix([4][4]float64{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}}),
+			want: Vec3{2, 6, 10},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.m.Y(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Matrix.Y() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestMatrix_Z(t *testing.T) {
+	tests := []struct {
+		name string
+		m    Matrix
+		want Vec3
+	}{
+		{
+			name: "test1",
+			m:    NewMatrix([4][4]float64{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}}),
+			want: Vec3{3, 7, 11},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.m.Z(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Matrix.Z() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestMatrix_W(t *testing.T) {
+	tests := []struct {
+		name string
+		m    Matrix
+		want Vec3
+	}{
+		{
+			name: "test1",
+			m:    NewMatrix([4][4]float64{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}}),
+			want: Vec3{4, 8, 12},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.m.W(); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Matrix.W() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

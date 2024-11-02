@@ -170,3 +170,25 @@ func RotationV(v Vec3, a float64) Matrix {
 
 	return r
 }
+
+//Получить X координаты из матрицы
+func (m Matrix) X() Vec3 {
+	return Vec3{m.m[0][0], m.m[1][0], m.m[2][0]}
+}
+
+//Получить Y координаты из матрицы
+func (m Matrix) Y() Vec3 {
+	return Vec3{m.m[0][1], m.m[1][1], m.m[2][1]}
+}
+
+//Получить Z координаты из матрицы
+
+func (m Matrix) Z() Vec3 {
+	return Vec3{m.m[0][2], m.m[1][2], m.m[2][2]}
+}
+
+//Получить W вектор из матрицы
+
+func (m Matrix) W() Vec3 {
+	return Vec3{m.m[0][3], m.m[1][3], m.m[2][3]}
+}
