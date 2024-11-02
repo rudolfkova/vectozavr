@@ -145,3 +145,28 @@ func (m Matrix) Rotation(v Vec3) Matrix {
 	r := RotationX(v.X).MatMul(RotationY(v.Y))
 	return r.MatMul(RotationZ(v.Z))
 }
+
+func (m Matrix) RotationV(v Vec3, a float64) Matrix {
+	var r Matrix
+	nv, err1 := v.Normalize()
+	if err1 != nil {
+		return ZeroMatrix()
+	}
+	c := math.Cos(a)
+	s := math.Sin(a)
+	r.m[0][0] = c + (1.0-c)*nv.X*nv.X
+	r.m[0][1] = (1.0-c)*nv.X*nv.Y - s*nv.Z
+	r.m[0][2] = (1.0-c)*nv.X*nv.Z + s*nv.Y
+
+	r.m[1][0] = (1.0-c)*nv.X*nv.Y + s*nv.Z
+	r.m[1][1] = c + (1.0-c)*nv.Y*nv.Y
+	r.m[1][2] = (1.0-c)*nv.Y*nv.Z - s*nv.X
+
+	r.m[2][0] = (1.0-c)*nv.X*nv.Z - s*nv.Y
+	r.m[2][1] = (1.0-c)*nv.Y*nv.Z + s*nv.X
+	r.m[2][2] = c + (1.0-c)*nv.Z*nv.Z
+
+	r.m[3][3] = 1
+
+	return r
+}
